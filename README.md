@@ -34,7 +34,28 @@
 
 ## 安装
 
-在 Unity 项目的 `Packages/manifest.json` 中添加：
+### 方式一：npm（推荐）
+
+在 `Packages/manifest.json` 中添加：
+
+```json
+{
+  "scopedRegistries": [
+    {
+      "name": "Azathrix",
+      "url": "https://registry.npmjs.org",
+      "scopes": ["com.azathrix"]
+    }
+  ],
+  "dependencies": {
+    "com.azathrix.mini-panda": "1.0.0"
+  }
+}
+```
+
+> 注册 `com.azathrix` scope 后，可以在 Package Manager 的 "My Registries" 中发现更多 Azathrix 工具包。
+
+### 方式二：Git URL
 
 ```json
 {
