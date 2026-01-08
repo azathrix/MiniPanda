@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="public/logo.png" alt="MiniPanda Logo" width="120">
+  <img src="public/icon.png" alt="MiniPanda Logo" width="120">
 </p>
 
 <h1 align="center">MiniPanda</h1>
