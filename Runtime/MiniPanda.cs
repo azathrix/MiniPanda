@@ -20,6 +20,9 @@ namespace Azathrix.MiniPanda
     /// </remarks>
     public class MiniPanda
     {
+        /// <summary>MiniPanda 版本号</summary>
+        public const string Version = "1.0.0";
+
         private readonly VirtualMachine _vm;  // 虚拟机实例
         private bool _started;                // 是否已启动
 
