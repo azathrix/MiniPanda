@@ -48,7 +48,7 @@
     }
   ],
   "dependencies": {
-    "com.azathrix.mini-panda": "1.0.0"
+    "com.azathrix.mini-panda": "*"
   }
 }
 ```
