@@ -1,6 +1,6 @@
 {
-    "name": "Azathrix.MiniPanda.Tests",
-    "rootNamespace": "Azathrix.MiniPanda.Tests",
+    "name": "Azathrix.MiniPanda.Editor",
+    "rootNamespace": "",
     "references": [
         "Azathrix.MiniPanda.Runtime"
     ],
@@ -11,12 +11,10 @@
     "allowUnsafeCode": false,
     "overrideReferences": true,
     "precompiledReferences": [
-        "nunit.framework.dll"
+        "Newtonsoft.Json.dll"
     ],
-    "autoReferenced": false,
-    "defineConstraints": [
-        "UNITY_INCLUDE_TESTS"
-    ],
+    "autoReferenced": true,
+    "defineConstraints": [],
     "versionDefines": [],
     "noEngineReferences": false
 }
