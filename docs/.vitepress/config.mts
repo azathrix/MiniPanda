@@ -5,7 +5,7 @@ export default defineConfig({
   description: '轻量级脚本语言，专为 Unity 设计',
   lang: 'zh-CN',
 
-  base: '/mini-panda/', // GitHub Pages 部署路径，根据实际仓库名修改
+  base: '/MiniPanda/',
 
   head: [
     ['link', { rel: 'icon', href: '/favicon.ico' }]
@@ -18,7 +18,7 @@ export default defineConfig({
       { text: '首页', link: '/' },
       { text: '教程', link: '/tutorial/' },
       { text: 'API', link: '/api/' },
-      { text: 'GitHub', link: 'https://github.com/your-username/mini-panda' }
+      { text: 'GitHub', link: 'https://github.com/Azathrix/MiniPanda' }
     ],
 
     sidebar: {
@@ -54,7 +54,7 @@ export default defineConfig({
     },
 
     socialLinks: [
-      { icon: 'github', link: 'https://github.com/your-username/mini-panda' }
+      { icon: 'github', link: 'https://github.com/Azathrix/MiniPanda' }
     ],
 
     footer: {

@@ -1,5 +1,12 @@
-﻿MiniPanda/Library
-MiniPanda/UserSettings
-MiniPanda/Temp
-MiniPanda/Logs
-MiniPanda/obj
+# Unity 测试项目
+MiniPanda/
+
+# VitePress
+docs/node_modules/
+docs/.vitepress/cache/
+docs/.vitepress/dist/
+
+# 不需要的文件
+package.docs.json
+package.docs.json.meta
+docs.meta
