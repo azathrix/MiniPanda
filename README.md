@@ -9,6 +9,8 @@
 </p>
 
 <p align="center">
+  <a href="https://github.com/Azathrix/MiniPanda"><img src="https://img.shields.io/badge/GitHub-MiniPanda-black.svg" alt="GitHub"></a>
+  <a href="https://www.npmjs.com/package/com.azathrix.mini-panda"><img src="https://img.shields.io/npm/v/com.azathrix.mini-panda.svg" alt="npm"></a>
   <a href="https://github.com/Azathrix/MiniPanda/blob/main/LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="License"></a>
   <a href="https://unity.com/"><img src="https://img.shields.io/badge/Unity-6000.3+-black.svg" alt="Unity"></a>
   <a href="https://azathrix.github.io/MiniPanda/"><img src="https://img.shields.io/badge/docs-online-green.svg" alt="Documentation"></a>
@@ -34,7 +36,19 @@
 
 ## 安装
 
-### 方式一：npm（推荐）
+### 方式一：Package Manager（推荐）
+
+1. 打开 `Edit > Project Settings > Package Manager`
+2. 在 `Scoped Registries` 中添加：
+   - Name: `Azathrix`
+   - URL: `https://registry.npmjs.org`
+   - Scope(s): `com.azathrix`
+3. 点击 `Save`
+4. 打开 `Window > Package Manager`
+5. 切换到 `My Registries`
+6. 找到 `MiniPanda` 并安装
+
+### 方式二：修改 manifest.json
 
 在 `Packages/manifest.json` 中添加：
 
@@ -55,15 +69,11 @@
 
 > 注册 `com.azathrix` scope 后，可以在 Package Manager 的 "My Registries" 中发现更多 Azathrix 工具包。
 
-### 方式二：Git URL
+### 方式三：Git URL
 
-```json
-{
-  "dependencies": {
-    "com.azathrix.mini-panda": "https://github.com/Azathrix/MiniPanda.git"
-  }
-}
-```
+1. 打开 `Window > Package Manager`
+2. 点击 `+` > `Add package from git URL...`
+3. 输入：`https://github.com/Azathrix/MiniPanda.git`
 
 ## 编辑器支持
 

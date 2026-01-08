@@ -1,9 +1,9 @@
 ﻿{
     "name": "com.azathrix.mini-panda",
     "displayName": "Mini Panda",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "unity": "6000.3",
-    "description": "\u4e00\u4e2a\u9002\u7528\u4e8eunity\u7684\u7eafc#\u7684\u89e3\u91ca\u8bed\u8a00\uff0c\u4ea4\u4e92\u53cb\u597d",
+    "description": "\u8f7b\u91cf\u7ea7\u811a\u672c\u8bed\u8a00\uff0c\u4e13\u4e3a Unity \u8bbe\u8ba1",
     "author": {
         "name": "InputName",
         "url": "https://azathrix.github.io/MiniPanda/"
