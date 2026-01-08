@@ -34,7 +34,7 @@
 
 ## 安装
 
-### 通过 Git URL
+在 Unity 项目的 `Packages/manifest.json` 中添加：
 
 ```json
 {
@@ -44,22 +44,9 @@
 }
 ```
 
-### 通过私有 Registry
+## 编辑器支持
 
-```json
-{
-  "scopedRegistries": [
-    {
-      "name": "Azathrix",
-      "url": "http://inputname.com:4873/",
-      "scopes": ["com.azathrix"]
-    }
-  ],
-  "dependencies": {
-    "com.azathrix.mini-panda": "1.0.0"
-  }
-}
-```
+推荐安装 [MiniPanda VSCode 插件](https://github.com/azathrix/MiniPanda-VSCodePlugin)，提供语法高亮、代码补全、跳转定义、断点调试。
 
 ## 快速示例
 
