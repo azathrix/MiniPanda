@@ -3,14 +3,39 @@
   "displayName": "Mini Panda",
   "version": "1.0.0",
   "unity": "6000.3",
-  "description": "\u4e00\u4e2a\u5c0f\u578b\u89e3\u91ca\u578b\u8bed\u8a00",
+  "unityRelease": "0f1",
+  "description": "一个小型解释型语言",
+  "keywords": [
+    "scripting",
+    "interpreter",
+    "language",
+    "panda"
+  ],
+  "category": "Scripting",
+  "type": "library",
   "author": {
-    "name": "InputName"
+    "name": "Azathrix",
+    "url": "https://github.com/azathrix"
   },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/azathrix/MiniPanda.git"
+  },
+  "bugs": {
+    "url": "https://github.com/azathrix/MiniPanda/issues"
+  },
+  "documentationUrl": "",
+  "changelogUrl": "",
+  "licensesUrl": "",
   "dependencies": {
     "com.unity.nuget.newtonsoft-json": "3.2.2"
   },
-  "testables": [
-    "com.azathrix.mini-panda"
+  "samples": [
+    {
+      "displayName": "Mini Panda Demo",
+      "description": "基础示例，展示 Mini Panda 脚本语言的基本用法",
+      "path": "Samples"
+    }
   ]
 }
