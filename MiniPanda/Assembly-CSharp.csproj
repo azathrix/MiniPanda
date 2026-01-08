@@ -946,6 +946,9 @@
     <Reference Include="Unity.VisualScripting.State.Editor">
       <HintPath>G:\Projects\MiniPanda\MiniPanda\Library\ScriptAssemblies\Unity.VisualScripting.State.Editor.dll</HintPath>
     </Reference>
+    <Reference Include="Azathrix.UpmEditor.Editor">
+      <HintPath>G:\Projects\MiniPanda\MiniPanda\Library\ScriptAssemblies\Azathrix.UpmEditor.Editor.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.Mathematics">
       <HintPath>G:\Projects\MiniPanda\MiniPanda\Library\ScriptAssemblies\Unity.Mathematics.dll</HintPath>
     </Reference>

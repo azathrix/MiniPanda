@@ -23,11 +23,42 @@
 
 ## 安装
 
-### 通过 Git URL（推荐）
+### 通过私有 Registry 安装（推荐）
+
+1. 编辑项目的 `Packages/manifest.json`，添加 scoped registry：
+
+```json
+{
+  "scopedRegistries": [
+    {
+      "name": "Azathrix",
+      "url": "http://inputname.com:4873/",
+      "scopes": ["com.azathrix"]
+    }
+  ],
+  "dependencies": {
+    "com.azathrix.mini-panda": "1.0.0"
+  }
+}
+```
+
+2. 保存后 Unity 会自动下载安装
+
+### 通过 Git URL 安装
 
 1. 打开 Unity，选择 `Window > Package Manager`
 2. 点击 `+` 按钮，选择 `Add package from git URL...`
-3. 输入仓库地址
+3. 输入：`git@github.com:azathrix/MiniPanda.git`
+
+或在 `Packages/manifest.json` 中添加：
+
+```json
+{
+  "dependencies": {
+    "com.azathrix.mini-panda": "git@github.com:azathrix/MiniPanda.git"
+  }
+}
+```
 
 ### 本地安装
 
