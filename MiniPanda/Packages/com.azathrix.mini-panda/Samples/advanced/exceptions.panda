@@ -1,0 +1,118 @@
+// 异常处理示例
+// 展示 MiniPanda 的 try/catch/finally 语法
+
+print("=== 异常处理示例 ===")
+
+// 1. 基本异常处理
+print("\n--- 基本异常处理 ---")
+
+func divide(a, b) {
+    if b == 0 {
+        throw "除数不能为零"
+    }
+    return a / b
+}
+
+try {
+    print("10 / 2 = " + divide(10, 2))
+    print("10 / 0 = " + divide(10, 0))  // 这行会抛出异常
+    print("这行不会执行")
+} catch e {
+    print("捕获异常: " + e)
+}
+
+// 2. finally 块
+print("\n--- finally 块 ---")
+
+func processFile(name) {
+    print("打开文件: " + name)
+    try {
+        if name == "error.txt" {
+            throw "文件读取失败"
+        }
+        print("处理文件内容...")
+        return "处理完成"
+    } catch e {
+        print("错误: " + e)
+        return "处理失败"
+    } finally {
+        print("关闭文件: " + name)  // 无论是否异常都会执行
+    }
+}
+
+print(processFile("data.txt"))
+print("")
+print(processFile("error.txt"))
+
+// 3. 嵌套异常处理
+print("\n--- 嵌套异常处理 ---")
+
+func outer() {
+    try {
+        inner()
+    } catch e {
+        print("外层捕获: " + e)
+    }
+}
+
+func inner() {
+    try {
+        throw "内层异常"
+    } catch e {
+        print("内层捕获: " + e)
+        throw "重新抛出: " + e  // 重新抛出异常
+    }
+}
+
+outer()
+
+// 4. 异常与返回值
+print("\n--- 异常与返回值 ---")
+
+func safeParse(str) {
+    try {
+        var n = num(str)
+        if n == null {
+            throw "无法解析: " + str
+        }
+        return n
+    } catch e {
+        print("解析错误: " + e)
+        return 0  // 返回默认值
+    }
+}
+
+print("safeParse('123') = " + safeParse("123"))
+print("safeParse('abc') = " + safeParse("abc"))
+
+// 5. 自定义错误对象
+print("\n--- 自定义错误对象 ---")
+
+func validateUser(user) {
+    if user == null {
+        throw {type: "ValidationError", message: "用户不能为空"}
+    }
+    if user.name == null {
+        throw {type: "ValidationError", message: "用户名不能为空", field: "name"}
+    }
+    if user.age < 0 {
+        throw {type: "ValidationError", message: "年龄不能为负数", field: "age"}
+    }
+    return true
+}
+
+try {
+    validateUser({name: null, age: 25})
+} catch e {
+    if type(e) == "object" {
+        print("错误类型: " + e.type)
+        print("错误信息: " + e.message)
+        if e.field != null {
+            print("错误字段: " + e.field)
+        }
+    } else {
+        print("错误: " + e)
+    }
+}
+
+print("\n=== 示例完成 ===")

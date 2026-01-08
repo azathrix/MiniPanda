@@ -1,0 +1,33 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Azathrix.MiniPanda.Tests", "Azathrix.MiniPanda.Tests.csproj", "{d50ccbb0-e9ad-e190-3aa9-48f32eb5d6ab}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Azathrix.MiniPanda", "Azathrix.MiniPanda.csproj", "{4572a750-bdc8-9965-3721-e25ab61a10b6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp-Editor", "Assembly-CSharp-Editor.csproj", "{969dd5f1-81fb-6f60-f06e-9f9ec2e91861}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp", "Assembly-CSharp.csproj", "{b5d6b646-62db-b4c4-3349-404812f31d54}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Azathrix.Panda.Samples", "Azathrix.Panda.Samples.csproj", "{52a38371-f27b-835c-b9fb-c3b39c74ec81}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{d50ccbb0-e9ad-e190-3aa9-48f32eb5d6ab}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{d50ccbb0-e9ad-e190-3aa9-48f32eb5d6ab}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4572a750-bdc8-9965-3721-e25ab61a10b6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4572a750-bdc8-9965-3721-e25ab61a10b6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{969dd5f1-81fb-6f60-f06e-9f9ec2e91861}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{969dd5f1-81fb-6f60-f06e-9f9ec2e91861}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{b5d6b646-62db-b4c4-3349-404812f31d54}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{b5d6b646-62db-b4c4-3349-404812f31d54}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{52a38371-f27b-835c-b9fb-c3b39c74ec81}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{52a38371-f27b-835c-b9fb-c3b39c74ec81}.Debug|Any CPU.Build.0 = Debug|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,305 @@
+// 游戏背包系统示例
+// 展示 MiniPanda 的面向对象和实际应用
+
+print("=== 游戏背包系统 ===")
+
+// 物品稀有度枚举
+enum Rarity {
+    Common,
+    Uncommon,
+    Rare,
+    Epic,
+    Legendary
+}
+
+// 物品类型枚举
+enum ItemType {
+    Weapon,
+    Armor,
+    Consumable,
+    Material,
+    Quest
+}
+
+// 物品基类
+class Item {
+    Item(id, name, type, rarity, stackable = false, maxStack = 1) {
+        this.id = id
+        this.name = name
+        this.type = type
+        this.rarity = rarity
+        this.stackable = stackable
+        this.maxStack = maxStack
+        this.count = 1
+    }
+
+    func getRarityName() {
+        if this.rarity == Rarity.Common return "普通"
+        if this.rarity == Rarity.Uncommon return "优秀"
+        if this.rarity == Rarity.Rare return "稀有"
+        if this.rarity == Rarity.Epic return "史诗"
+        if this.rarity == Rarity.Legendary return "传说"
+        return "未知"
+    }
+
+    func getTypeName() {
+        if this.type == ItemType.Weapon return "武器"
+        if this.type == ItemType.Armor return "防具"
+        if this.type == ItemType.Consumable return "消耗品"
+        if this.type == ItemType.Material return "材料"
+        if this.type == ItemType.Quest return "任务物品"
+        return "未知"
+    }
+
+    func toString() {
+        var str = "[" + this.getRarityName() + "] " + this.name
+        if this.stackable && this.count > 1 {
+            str = str + " x" + this.count
+        }
+        return str
+    }
+}
+
+// 武器类
+class Weapon : Item {
+    Weapon(id, name, rarity, damage, attackSpeed) {
+        super.Item(id, name, ItemType.Weapon, rarity, false, 1)
+        this.damage = damage
+        this.attackSpeed = attackSpeed
+    }
+
+    func getDPS() {
+        return this.damage * this.attackSpeed
+    }
+
+    func toString() {
+        return super.toString() + " (伤害:" + this.damage + " 攻速:" + this.attackSpeed + ")"
+    }
+}
+
+// 消耗品类
+class Consumable : Item {
+    Consumable(id, name, rarity, effect, value, maxStack = 99) {
+        super.Item(id, name, ItemType.Consumable, rarity, true, maxStack)
+        this.effect = effect  // "heal", "mana", "buff"
+        this.value = value
+    }
+
+    func use(target) {
+        if this.count <= 0 {
+            throw "物品数量不足"
+        }
+        this.count = this.count - 1
+
+        if this.effect == "heal" {
+            print(target.name + " 恢复了 " + this.value + " 点生命值")
+            target.hp = target.hp + this.value
+            if target.hp > target.maxHp {
+                target.hp = target.maxHp
+            }
+        } else if this.effect == "mana" {
+            print(target.name + " 恢复了 " + this.value + " 点魔法值")
+        }
+
+        return this.count > 0
+    }
+}
+
+// 背包类
+class Inventory {
+    Inventory(capacity) {
+        this.capacity = capacity
+        this.slots = []
+        for i in range(capacity) {
+            push(this.slots, null)
+        }
+        this.gold = 0
+    }
+
+    // 查找空槽位
+    func findEmptySlot() {
+        for i in range(this.capacity) {
+            if this.slots[i] == null {
+                return i
+            }
+        }
+        return -1
+    }
+
+    // 查找可堆叠的槽位
+    func findStackableSlot(item) {
+        if !item.stackable return -1
+
+        for i in range(this.capacity) {
+            var slot = this.slots[i]
+            if slot != null && slot.id == item.id && slot.count < slot.maxStack {
+                return i
+            }
+        }
+        return -1
+    }
+
+    // 添加物品
+    func addItem(item) {
+        // 尝试堆叠
+        if item.stackable {
+            var stackSlot = this.findStackableSlot(item)
+            if stackSlot >= 0 {
+                var existing = this.slots[stackSlot]
+                var canAdd = existing.maxStack - existing.count
+                var toAdd = item.count
+                if toAdd > canAdd {
+                    toAdd = canAdd
+                }
+                existing.count = existing.count + toAdd
+                item.count = item.count - toAdd
+                print("堆叠物品: " + item.name + " +" + toAdd)
+
+                if item.count > 0 {
+                    return this.addItem(item)  // 递归添加剩余
+                }
+                return true
+            }
+        }
+
+        // 查找空槽位
+        var emptySlot = this.findEmptySlot()
+        if emptySlot < 0 {
+            print("背包已满!")
+            return false
+        }
+
+        this.slots[emptySlot] = item
+        print("获得物品: " + item.toString())
+        return true
+    }
+
+    // 移除物品
+    func removeItem(slotIndex, count = 1) {
+        if slotIndex < 0 || slotIndex >= this.capacity {
+            return false
+        }
+
+        var item = this.slots[slotIndex]
+        if item == null return false
+
+        if item.stackable {
+            item.count = item.count - count
+            if item.count <= 0 {
+                this.slots[slotIndex] = null
+            }
+        } else {
+            this.slots[slotIndex] = null
+        }
+
+        print("移除物品: " + item.name)
+        return true
+    }
+
+    // 使用物品
+    func useItem(slotIndex, target) {
+        var item = this.slots[slotIndex]
+        if item == null {
+            print("该槽位没有物品")
+            return false
+        }
+
+        if item.type != ItemType.Consumable {
+            print("该物品不能使用")
+            return false
+        }
+
+        var hasMore = item.use(target)
+        if !hasMore {
+            this.slots[slotIndex] = null
+        }
+        return true
+    }
+
+    // 获取物品数量
+    func getItemCount() {
+        var count = 0
+        for slot in this.slots {
+            if slot != null {
+                count = count + 1
+            }
+        }
+        return count
+    }
+
+    // 显示背包
+    func display() {
+        print("\n=== 背包 (" + this.getItemCount() + "/" + this.capacity + ") ===")
+        print("金币: " + this.gold)
+        print("---")
+        for i in range(this.capacity) {
+            var slot = this.slots[i]
+            if slot != null {
+                print("[" + i + "] " + slot.toString())
+            }
+        }
+        print("===")
+    }
+}
+
+// 玩家类
+class Player {
+    Player(name) {
+        this.name = name
+        this.hp = 100
+        this.maxHp = 100
+        this.inventory = Inventory(10)
+    }
+
+    func showStatus() {
+        print("\n--- " + this.name + " ---")
+        print("HP: " + this.hp + "/" + this.maxHp)
+    }
+}
+
+// 测试
+print("\n--- 创建玩家和物品 ---")
+
+var player = Player("勇者")
+player.showStatus()
+
+// 创建一些物品
+var sword = Weapon(1, "铁剑", Rarity.Common, 15, 1.2)
+var fireSword = Weapon(2, "烈焰之剑", Rarity.Epic, 45, 1.0)
+var healthPotion = Consumable(101, "生命药水", Rarity.Common, "heal", 30, 99)
+var manaPotion = Consumable(102, "魔法药水", Rarity.Common, "mana", 20, 99)
+
+// 添加物品到背包
+print("\n--- 添加物品 ---")
+player.inventory.addItem(sword)
+player.inventory.addItem(fireSword)
+player.inventory.addItem(healthPotion)
+
+// 添加更多药水（测试堆叠）
+var healthPotion2 = Consumable(101, "生命药水", Rarity.Common, "heal", 30, 99)
+healthPotion2.count = 5
+player.inventory.addItem(healthPotion2)
+
+player.inventory.addItem(manaPotion)
+
+// 显示背包
+player.inventory.display()
+
+// 使用物品
+print("\n--- 使用物品 ---")
+player.hp = 50  // 模拟受伤
+player.showStatus()
+
+player.inventory.useItem(2, player)  // 使用生命药水
+player.showStatus()
+
+// 再次显示背包
+player.inventory.display()
+
+// 添加金币
+print("\n--- 获得金币 ---")
+player.inventory.gold = player.inventory.gold + 100
+print("获得 100 金币!")
+player.inventory.display()
+
+print("\n=== 示例完成 ===")

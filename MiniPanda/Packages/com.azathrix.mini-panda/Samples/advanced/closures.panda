@@ -1,0 +1,192 @@
+// 闭包示例
+// 展示 MiniPanda 的闭包和高阶函数特性
+
+print("=== 闭包示例 ===")
+
+// 1. 基本闭包 - 计数器
+print("\n--- 计数器闭包 ---")
+
+func makeCounter() {
+    var count = 0
+    return () => {
+        count = count + 1
+        return count
+    }
+}
+
+var counter1 = makeCounter()
+var counter2 = makeCounter()
+
+print("counter1: " + counter1())  // 1
+print("counter1: " + counter1())  // 2
+print("counter1: " + counter1())  // 3
+print("counter2: " + counter2())  // 1 (独立的计数器)
+print("counter2: " + counter2())  // 2
+
+// 2. 带参数的闭包工厂
+print("\n--- 乘法器工厂 ---")
+
+func makeMultiplier(factor) {
+    return (x) => x * factor
+}
+
+var double = makeMultiplier(2)
+var triple = makeMultiplier(3)
+var tenTimes = makeMultiplier(10)
+
+print("double(5) = " + double(5))      // 10
+print("triple(5) = " + triple(5))      // 15
+print("tenTimes(5) = " + tenTimes(5))  // 50
+
+// 3. 闭包保存状态
+print("\n--- 银行账户 ---")
+
+func createAccount(initialBalance) {
+    var balance = initialBalance
+
+    return {
+        deposit: (amount) => {
+            balance = balance + amount
+            return balance
+        },
+        withdraw: (amount) => {
+            if amount > balance {
+                throw "余额不足"
+            }
+            balance = balance - amount
+            return balance
+        },
+        getBalance: () => balance
+    }
+}
+
+var account = createAccount(100)
+print("初始余额: " + account.getBalance())
+print("存入 50: " + account.deposit(50))
+print("取出 30: " + account.withdraw(30))
+print("当前余额: " + account.getBalance())
+
+// 4. 高阶函数 - map
+print("\n--- 高阶函数 map ---")
+
+func map(arr, fn) {
+    var result = []
+    for item in arr {
+        push(result, fn(item))
+    }
+    return result
+}
+
+var numbers = [1, 2, 3, 4, 5]
+var squared = map(numbers, (x) => x * x)
+var doubled = map(numbers, (x) => x * 2)
+
+print("原数组: " + join(numbers, ", "))
+print("平方: " + join(squared, ", "))
+print("翻倍: " + join(doubled, ", "))
+
+// 5. 高阶函数 - filter
+print("\n--- 高阶函数 filter ---")
+
+func filter(arr, predicate) {
+    var result = []
+    for item in arr {
+        if predicate(item) {
+            push(result, item)
+        }
+    }
+    return result
+}
+
+var evens = filter(numbers, (x) => x % 2 == 0)
+var odds = filter(numbers, (x) => x % 2 != 0)
+var greaterThan2 = filter(numbers, (x) => x > 2)
+
+print("偶数: " + join(evens, ", "))
+print("奇数: " + join(odds, ", "))
+print("大于2: " + join(greaterThan2, ", "))
+
+// 6. 高阶函数 - reduce
+print("\n--- 高阶函数 reduce ---")
+
+func reduce(arr, fn, initial) {
+    var acc = initial
+    for item in arr {
+        acc = fn(acc, item)
+    }
+    return acc
+}
+
+var sum = reduce(numbers, (acc, x) => acc + x, 0)
+var product = reduce(numbers, (acc, x) => acc * x, 1)
+var max = reduce(numbers, (acc, x) => x > acc ? x : acc, numbers[0])
+
+print("求和: " + sum)
+print("求积: " + product)
+print("最大值: " + max)
+
+// 7. 函数组合
+print("\n--- 函数组合 ---")
+
+func compose(f, g) {
+    return (x) => f(g(x))
+}
+
+var addOne = (x) => x + 1
+var square = (x) => x * x
+
+var addThenSquare = compose(square, addOne)  // 先加1再平方
+var squareThenAdd = compose(addOne, square)  // 先平方再加1
+
+print("addThenSquare(4) = " + addThenSquare(4))  // (4+1)^2 = 25
+print("squareThenAdd(4) = " + squareThenAdd(4))  // 4^2+1 = 17
+
+// 8. 柯里化
+print("\n--- 柯里化 ---")
+
+func curry(fn) {
+    return (a) => (b) => fn(a, b)
+}
+
+func add(a, b) {
+    return a + b
+}
+
+var curriedAdd = curry(add)
+var add5 = curriedAdd(5)
+var add10 = curriedAdd(10)
+
+print("add5(3) = " + add5(3))    // 8
+print("add10(3) = " + add10(3))  // 13
+
+// 9. 记忆化（缓存）
+print("\n--- 记忆化 ---")
+
+func memoize(fn) {
+    var cache = {}
+    return (n) => {
+        var key = str(n)
+        if contains(cache, key) {
+            return cache[key]
+        }
+        var result = fn(n)
+        cache[key] = result
+        return result
+    }
+}
+
+var callCount = 0
+func expensiveOperation(n) {
+    callCount = callCount + 1
+    print("  计算 fib(" + n + ")...")
+    if n <= 1 return n
+    return expensiveOperation(n - 1) + expensiveOperation(n - 2)
+}
+
+// 不使用记忆化
+callCount = 0
+print("不使用记忆化计算 fib(10):")
+var result1 = expensiveOperation(10)
+print("结果: " + result1 + ", 调用次数: " + callCount)
+
+print("\n=== 示例完成 ===")

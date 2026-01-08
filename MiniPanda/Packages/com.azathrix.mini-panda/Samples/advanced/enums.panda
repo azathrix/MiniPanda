@@ -1,0 +1,202 @@
+// 枚举示例
+// 展示 MiniPanda 的枚举特性
+
+print("=== 枚举示例 ===")
+
+// 1. 基本枚举
+print("\n--- 基本枚举 ---")
+
+enum Direction {
+    Up,
+    Down,
+    Left,
+    Right
+}
+
+print("Direction.Up = " + Direction.Up)       // 0
+print("Direction.Down = " + Direction.Down)   // 1
+print("Direction.Left = " + Direction.Left)   // 2
+print("Direction.Right = " + Direction.Right) // 3
+
+// 2. 枚举在条件中使用
+print("\n--- 枚举条件判断 ---")
+
+var currentDirection = Direction.Up
+
+func move(direction) {
+    if direction == Direction.Up {
+        print("向上移动")
+    } else if direction == Direction.Down {
+        print("向下移动")
+    } else if direction == Direction.Left {
+        print("向左移动")
+    } else if direction == Direction.Right {
+        print("向右移动")
+    }
+}
+
+move(Direction.Up)
+move(Direction.Left)
+
+// 3. 游戏状态机
+print("\n--- 游戏状态机 ---")
+
+enum GameState {
+    Menu,
+    Playing,
+    Paused,
+    GameOver
+}
+
+class Game {
+    Game() {
+        this.state = GameState.Menu
+    }
+
+    func start() {
+        if this.state == GameState.Menu {
+            this.state = GameState.Playing
+            print("游戏开始!")
+        }
+    }
+
+    func pause() {
+        if this.state == GameState.Playing {
+            this.state = GameState.Paused
+            print("游戏暂停")
+        }
+    }
+
+    func resume() {
+        if this.state == GameState.Paused {
+            this.state = GameState.Playing
+            print("游戏继续")
+        }
+    }
+
+    func gameOver() {
+        this.state = GameState.GameOver
+        print("游戏结束!")
+    }
+
+    func getStateText() {
+        if this.state == GameState.Menu return "主菜单"
+        if this.state == GameState.Playing return "游戏中"
+        if this.state == GameState.Paused return "已暂停"
+        if this.state == GameState.GameOver return "游戏结束"
+        return "未知状态"
+    }
+}
+
+var game = Game()
+print("当前状态: " + game.getStateText())
+game.start()
+print("当前状态: " + game.getStateText())
+game.pause()
+print("当前状态: " + game.getStateText())
+game.resume()
+print("当前状态: " + game.getStateText())
+game.gameOver()
+print("当前状态: " + game.getStateText())
+
+// 4. 角色职业
+print("\n--- 角色职业 ---")
+
+enum CharacterClass {
+    Warrior,
+    Mage,
+    Archer,
+    Healer
+}
+
+func getClassStats(charClass) {
+    if charClass == CharacterClass.Warrior {
+        return {name: "战士", hp: 150, atk: 20, def: 15, magic: 5}
+    }
+    if charClass == CharacterClass.Mage {
+        return {name: "法师", hp: 80, atk: 5, def: 5, magic: 30}
+    }
+    if charClass == CharacterClass.Archer {
+        return {name: "弓箭手", hp: 100, atk: 15, def: 8, magic: 10}
+    }
+    if charClass == CharacterClass.Healer {
+        return {name: "治疗师", hp: 90, atk: 8, def: 10, magic: 25}
+    }
+    return null
+}
+
+func printStats(charClass) {
+    var stats = getClassStats(charClass)
+    print(stats.name + " - HP:" + stats.hp + " ATK:" + stats.atk + " DEF:" + stats.def + " MAG:" + stats.magic)
+}
+
+printStats(CharacterClass.Warrior)
+printStats(CharacterClass.Mage)
+printStats(CharacterClass.Archer)
+printStats(CharacterClass.Healer)
+
+// 5. 日志级别
+print("\n--- 日志级别 ---")
+
+enum LogLevel {
+    Debug,
+    Info,
+    Warning,
+    Error
+}
+
+var currentLogLevel = LogLevel.Info
+
+func log(level, message) {
+    if level >= currentLogLevel {
+        var prefix = ""
+        if level == LogLevel.Debug prefix = "[DEBUG]"
+        if level == LogLevel.Info prefix = "[INFO]"
+        if level == LogLevel.Warning prefix = "[WARN]"
+        if level == LogLevel.Error prefix = "[ERROR]"
+        print(prefix + " " + message)
+    }
+}
+
+print("当前日志级别: Info")
+log(LogLevel.Debug, "这是调试信息")    // 不会显示
+log(LogLevel.Info, "这是普通信息")     // 显示
+log(LogLevel.Warning, "这是警告信息")  // 显示
+log(LogLevel.Error, "这是错误信息")    // 显示
+
+print("\n设置日志级别为 Warning")
+currentLogLevel = LogLevel.Warning
+log(LogLevel.Debug, "这是调试信息")    // 不会显示
+log(LogLevel.Info, "这是普通信息")     // 不会显示
+log(LogLevel.Warning, "这是警告信息")  // 显示
+log(LogLevel.Error, "这是错误信息")    // 显示
+
+// 6. 星期枚举
+print("\n--- 星期枚举 ---")
+
+enum Weekday {
+    Sunday,
+    Monday,
+    Tuesday,
+    Wednesday,
+    Thursday,
+    Friday,
+    Saturday
+}
+
+func isWeekend(day) {
+    return day == Weekday.Saturday || day == Weekday.Sunday
+}
+
+func getDayName(day) {
+    var names = ["周日", "周一", "周二", "周三", "周四", "周五", "周六"]
+    return names[day]
+}
+
+for day in range(7) {
+    var name = getDayName(day)
+    var type = isWeekend(day) ? "周末" : "工作日"
+    print(name + " - " + type)
+}
+
+print("\n=== 示例完成 ===")

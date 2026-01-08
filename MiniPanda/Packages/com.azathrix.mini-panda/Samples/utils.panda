@@ -1,0 +1,17 @@
+// utils.panda - 工具模块示例
+
+export func helper() {
+    print("Helper function called!")
+}
+
+export func clamp(value, min, max) {
+    if value < min return min
+    if value > max return max
+    return value
+}
+
+export func lerp(a, b, t) {
+    return a + (b - a) * t
+}
+
+export var VERSION = "1.0.0"
