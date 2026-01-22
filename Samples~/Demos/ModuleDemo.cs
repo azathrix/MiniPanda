@@ -1,7 +1,5 @@
 using System.IO;
 using UnityEngine;
-using UnityEditor;
-using Azathrix.MiniPanda.Core;
 
 namespace Azathrix.MiniPanda.Samples
 {
@@ -10,14 +8,6 @@ namespace Azathrix.MiniPanda.Samples
     /// </summary>
     public class ModuleDemo : DemoBase
     {
-        private string _samplesPath;
-
-        protected override void Start()
-        {
-            _samplesPath = Path.GetDirectoryName(AssetDatabase.GetAssetPath(MonoScript.FromMonoBehaviour(this)));
-            base.Start();
-        }
-
         protected override void RunDemo()
         {
             Log("=== 模块导入示例 ===");
@@ -42,18 +32,22 @@ namespace Azathrix.MiniPanda.Samples
 
         void LoadModules()
         {
-            LoadModuleIfExists("utils.panda", "utils");
-            LoadModuleIfExists("math/vector.panda", "math.vector");
-            LoadModuleIfExists("example.panda", "example");
+            LoadModuleIfExists("utils");
+            LoadModuleIfExists("math.vector");
+            LoadModuleIfExists("example");
         }
 
-        void LoadModuleIfExists(string relativePath, string moduleName)
+        void LoadModuleIfExists(string moduleName)
         {
-            var fullPath = Path.Combine(_samplesPath, "..", relativePath);
-            if (File.Exists(fullPath))
+            var fullPath = Path.Combine("PandaScripts", moduleName.Replace(".", "/")).Replace("\\", "/") + ".panda";
+            var ta = Resources.Load<TextAsset>(fullPath);
+            if (ta != null)
             {
-                var normalizedPath = Path.GetFullPath(fullPath).Replace("\\", "/");
-                _panda.LoadModule(File.ReadAllBytes(fullPath), moduleName, normalizedPath);
+                _panda.LoadModule(ta.bytes, moduleName, fullPath);
+            }
+            else
+            {
+                Log("未找到模块:" + moduleName);
             }
         }
     }

@@ -51,7 +51,7 @@ namespace Azathrix.MiniPanda.LSP
             };
             _listenThread.Start();
 
-            UnityEngine.Debug.Log($"[MiniPanda] LSP server started on port {port}");
+            // UnityEngine.Debug.Log($"[MiniPanda] LSP server started on port {port}");
         }
 
         /// <summary>
@@ -69,7 +69,7 @@ namespace Azathrix.MiniPanda.LSP
             }
             _listenThread?.Join(1000);
 
-            UnityEngine.Debug.Log("[MiniPanda] LSP server stopped");
+            // UnityEngine.Debug.Log("[MiniPanda] LSP server stopped");
         }
 
         private void ListenLoop()

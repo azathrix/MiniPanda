@@ -11,5 +11,16 @@
     },
     "dependencies": {
         "com.unity.nuget.newtonsoft-json": "3.2.2"
-    }
+    },
+    "samples": [
+        {
+            "displayName": "Tests",
+            "description": "编辑器下的 MiniPanda 完整单元测试",
+            "path": "Tests~"
+        },
+        {
+            "displayName": "Samples",
+            "description": "可运行的Demo",
+            "path": "Samples~"
+        }]
 }
