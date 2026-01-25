@@ -44,7 +44,7 @@ namespace Azathrix.MiniPanda.Editor
             }
             catch (System.Exception ex)
             {
-                UnityEngine.Debug.LogError($"[MiniPanda] Failed to start LSP server: {ex.Message}");
+                // UnityEngine.Debug.LogError($"[MiniPanda] Failed to start LSP server: {ex.Message}");
             }
         }
 
